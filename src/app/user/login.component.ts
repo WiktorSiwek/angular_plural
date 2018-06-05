@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
     `]
 })
 export class LoginComponent {
-    username;
+    userName;
     password;
     mouseoverLogin;
     constructor(private _authService: AuthService, private _router: Router) {}
