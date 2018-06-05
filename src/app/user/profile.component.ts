@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -27,26 +27,25 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName
-    })
+    });
   }
 
   cancel() {
-    this._router.navigate(['/events'])
+    this._router.navigate(['/events']);
   }
 
   saveProfile(formValues) {
     if (this.profileForm.valid) {
-      this._authService.updateCurrentUser(formValues.firstName, formValues.lastName)
-      this._router.navigate(['/events'])
+      this._authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+      this._router.navigate(['/events']);
     }
   }
 
   validateLastName() {
-    return this.lastName.valid || this.lastName.untouched
+    return this.lastName.valid || this.lastName.untouched;
   }
 
-  
   validateFirstName() {
-    return this.firstName.valid || this.firstName.untouched
+    return this.firstName.valid || this.firstName.untouched;
   }
 }
