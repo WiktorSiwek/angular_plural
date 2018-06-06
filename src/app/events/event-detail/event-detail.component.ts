@@ -8,13 +8,15 @@ import { IEvent, ISession } from '..';
     styles: [`
         .container { padding-left: 20px; padding-right: 20px; }
         .event-image { height: 100px; }
-        a { cursor: pointer }
+        a { cursor: pointer; }
     `]
 })
 
 export class EventDetailsComponent {
     event: IEvent;
     addMode: boolean;
+    filterBy = 'all';
+    sortBy = 'votes';
     constructor(
         private eventService: EventService,
         private _route: ActivatedRoute,
