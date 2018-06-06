@@ -16,11 +16,13 @@ import {
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { ToastrService } from './common/toastr.service';
+import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { appRoutes } from './routes';
 import { Error404Component } from './errors/404.component';
 import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {  } from './common/collapsible-well.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     NavBarComponent,
     Error404Component,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    CollapsibleWellComponent
   ],
   imports: [
     BrowserModule,
