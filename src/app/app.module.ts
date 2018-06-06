@@ -16,7 +16,7 @@ import {
 } from './events/index';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { ToastrService } from './common/toastr.service';
+import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { appRoutes } from './routes';
 import { Error404Component } from './errors/404.component';
@@ -24,6 +24,8 @@ import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {  } from './common/collapsible-well.component';
+
+declare let toastr: Toastr;
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import {  } from './common/collapsible-well.component';
   ],
   providers: [
     EventService,
-    ToastrService,
+    {
+      provide: TOASTR_TOKEN,
+      useValue: toastr
+    },
     EventRouteActivator,
     EventListResolver,
     AuthService,

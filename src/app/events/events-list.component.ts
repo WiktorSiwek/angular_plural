@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from './shared/events.service';
-import { ToastrService } from '../common/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { IEvent } from '.';
 
@@ -11,7 +10,7 @@ import { IEvent } from '.';
       <hr />
       <div class="row">
         <div *ngFor="let event of events" class="col-md-5">
-          <app-event-thumbnail (click)="handleThumbnailClick(event.name)" [event]="event"></app-event-thumbnail>
+          <app-event-thumbnail [event]="event"></app-event-thumbnail>
         </div>
       </div>
     </div>
@@ -22,15 +21,10 @@ export class EventsListComponent implements OnInit {
 
   constructor(
     private _eventService: EventService,
-    private _toastr: ToastrService,
     private _route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.events = this._route.snapshot.data['events'];
-  }
-
-  handleThumbnailClick(name) {
-    this._toastr.success(name);
   }
 }
