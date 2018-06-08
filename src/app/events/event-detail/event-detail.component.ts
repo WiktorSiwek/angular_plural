@@ -20,11 +20,11 @@ export class EventDetailsComponent implements OnInit {
     constructor(
         private eventService: EventService,
         private _route: ActivatedRoute,
-    ) {}
+    ) { }
 
     ngOnInit() {
-        this._route.params.forEach((params: Params) => {
-            this.event = this.eventService.getEvent(+params['id']);
+        this._route.data.forEach((data) => {
+            this.event = this._route.snapshot.data['event'];
             this.addMode = false;
         });
     }

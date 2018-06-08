@@ -8,14 +8,14 @@ import {
   EventService,
   EventDetailsComponent,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolver,
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
   UpvoteComponent,
   VoterService,
-  LocationValidatorDirective
+  LocationValidatorDirective,
+  EventResolverService
 } from './events/index';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav/navbar.component';
@@ -64,22 +64,13 @@ const jQuery = window['$'];
   ],
   providers: [
     EventService,
-    {
-      provide: TOASTR_TOKEN,
-      useValue: toastr
-    },
-    {
-      provide: JQ_TOKEN,
-      useValue: jQuery
-    },
-    EventRouteActivator,
     EventListResolver,
     AuthService,
-    {
-      provide: 'canDeactivateCreateEvent',
-      useValue: checkDirtyState
-    },
-    VoterService
+    VoterService,
+    EventResolverService,
+    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState },
+    { provide: JQ_TOKEN, useValue: jQuery },
+    { provide: TOASTR_TOKEN, useValue: toastr }
   ],
   bootstrap: [AppComponent]
 })
