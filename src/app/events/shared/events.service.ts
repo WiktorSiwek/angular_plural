@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { IEvent, ISession } from '.';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import 'rxjs/add/observable/of';
 import { catchError } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class EventService {
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   getEvents(): Observable<IEvent[]> {
     // before server ----------------
@@ -23,18 +23,13 @@ export class EventService {
   getEvent(id): Observable<IEvent> {
     // return EVENTS.find(event => event.id === id);
     return this._http.get<IEvent>('/api/events/' + id)
-      .pipe(catchError(this.handleError<IEvent>('getEvents')));
+      .pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
 
   saveEvent(event) {
-    event.id = 999;
-    event.session = [];
-    EVENTS.push(event);
-  }
-
-  updateEvent(event) {
-    const index = EVENTS.findIndex(x => x.id = event.id);
-    EVENTS[index] = event;
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this._http.post('/api/events', event, options)
+      .pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
 
   searchSessions(searchTerm: string) {
@@ -57,7 +52,7 @@ export class EventService {
     return emitter;
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.log(error);
       return Observable.of(result as T);
